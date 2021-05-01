@@ -1,7 +1,7 @@
-let express = reqiure("express");
+let express = require("express");
 let app = express();
 
-let { createClient } = require("@urql/client");
+let { createClient } = require("@urql/core")
 let { Client, Webhook, resources } = require("coinbase-commerce-node");
 const { COINBASE_SECRET, SIGNING_SECRET } = require("./config");
 
