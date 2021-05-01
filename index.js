@@ -8,6 +8,7 @@ const { COINBASE_SECRET, SIGNING_SECRET } = require("./config");
 let urqlClient = createClient({
     url: "https://katze.tech/graphql"
 });
+
 Client.init(COINBASE_SECRET)
 
 let { Charge } = resources;
