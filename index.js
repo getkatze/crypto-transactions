@@ -5,6 +5,11 @@ let { createClient } = require("@urql/core")
 let { Client, Webhook, resources } = require("coinbase-commerce-node");
 const { COINBASE_SECRET, SIGNING_SECRET } = require("./config");
 
+if(!COINBASE_SECRET || !SIGNING_SECRET){
+    COINBASE_SECRET = process.env.COINBASE_SECRET;
+    SIGNING_SECRET = process.env.SIGNING_SECRET;
+}
+
 let urqlClient = createClient({
     url: "https://katze.tech/graphql"
 });
@@ -41,7 +46,7 @@ app.get("/webhookHandler", async (req, res) => {
     const signature = req.headers["x-cc-webhook-signature"];
 
     try {
-        const event = Webhook.verifyEventBody(rawBody, signature, signingSecret);
+        const event = Webhook.verifyEventBody(rawBody, signature, SIGNING_SECRET);
         functions.logger.info(event);
 
         if (event.type === "charge:pending") {
