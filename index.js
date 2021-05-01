@@ -13,7 +13,11 @@ Client.init(COINBASE_SECRET)
 
 let { Charge } = resources;
 
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
+    res.send("Hello World").status(200);
+})
+
+app.get("/chargeUser", async (req, res) => {
     const chargedData = {
         name: req.body.campaignId,
         description: `Campaign invoice for ${req.body.campaignId}`,
